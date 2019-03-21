@@ -1,0 +1,283 @@
+<html>
+<head>
+	<title>Account</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="Account.css">
+  <link rel="stylesheet" type="text/css" href="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body ondragstart="return false;" ondrop="return false;" class="visible">
+  <div>
+      <header class="tete">
+        <div class="title">
+            <span>EL CASINO DORADO</span>
+        </div>
+        <div class="trait"></div>
+              
+      </header>
+  </div>
+  
+		<div class="roulette">
+        <canvas id="wheelcanvas" width="500" height="500"></canvas>
+    </div>
+	
+
+	<div id="jeu">
+					<form>
+            <div class="select">
+                <td>
+                  <div class="pari">
+                    <h4>CHOIX DE PARI !</h4>
+                  </div>
+                  
+                  <select id="choix" name="choix">
+                          <option value="PAIR" >PAIR</option>
+                          <option value="IMPAIR">IMPAIR</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                          </td>
+
+                    <br><br><td>
+                      <input type="number" value="" id="test" placeholder="Mise">
+                    </td>
+                    <br><br>
+                    <button type="button" class="btn-A-Propos" value="spin" onclick="spin();" style="float: left;">Go !</button>
+            </div>
+                 <br><br>
+
+                    
+                      <div class="jouer">
+                          <div class="pari">
+                              <h4>RESULTAT DE PARI !</h4>
+                          </div>
+                          <td>
+                            <label class="vpm">PORTE MONNAIE: </label><input type="number" value= 100 id="joueur" placeholder="PM Joueur">
+                          </td><br><br><td>
+                            <label class="ordi">ORDINATEUR: </label><input type="number" value= "" id="ordinateur" placeholder="PM Ordinateur">
+                          </td>
+                     <br><br>
+                
+
+                <br><td width="36%">
+                    <input type="reset" value="Effacer les donnees du formulaire">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </td>      
+                     </div
+    					<br><br>
+    					</tr>
+
+					</form>
+	</div>
+  <footer class="footer">
+    <div  class="texte">
+        <p>Lorsque vous entrez dans notre Casino avant de faire vos paris, pour vous motiver, nous vous offrons avant tout 100 F au départ. Cette dernière est une meilleure manière d'accueillir nos clients. Une excellent façon de jouer avec une roulette accompagnée d'ingrédients de la plus haute qualité.Nous ferons tout ce qui est en notre pouvoir pour que les choses se passent bien dans vos diffèrentes paris et nous vous souhaitons BONNE CHANCE !</p>
+    </div>
+    
+    <div class="copyright">
+          <p>Copyright &copy; El Casino Dorado 2019</p>
+    </div>
+    
+  </footer>
+<script type="text/javascript">
+   	  var colors = ["green", "black", "red", "black", "red",
+                 "black", "red", "black", "red", "black", "red", "black", "red",
+                 "black", "red", "black", "red", "black", "red", "green", "red", "black", "red", "black", "red", "black", "red", "black", "red", "black", "red", "black", "red", "black", "red", "black", "red", "black"];
+   	  var number = ["0", "28", "9", "26",
+                       "30", "11", "7", "20",
+                       "32", "17", "5", "22", "34", "15", "3", "24", "36", "13", "1", "00", "27", "10", "25", "29", "12", "8", "19", "31", "18", "6", "21", "33", "16", "4", "23", "35", "14", "2"];
+  
+   		var startAngle = 0;
+   	 	var arc = Math.PI / 19;
+   	  var spinTimeout = null;
+  		var answer;
+  		var Total = 1000;
+  
+  		var spinArcStart = 10;
+  		var spinTime = 0;
+  		var spinTimeTotal = 0;
+  
+  		var ctx;
+  
+  		function draw() {
+    	drawRouletteWheel();
+  		}
+  
+  		function drawRouletteWheel() {
+   		var canvas = document.getElementById("wheelcanvas");
+    	if (canvas.getContext) {
+     	var outsideRadius = 220;
+      	var textRadius = 180;
+      	var insideRadius = 150;
+      
+      	ctx = canvas.getContext("2d");
+      	ctx.clearRect(0,0,500,500);
+      
+      
+      	ctx.strokeStyle = "#000";
+      	ctx.lineWidth = 10;
+      
+      	ctx.font = 'bold 20px Arial';
+      
+      	for(var i = 0; i < 38; i++) {
+        var angle = startAngle + i * arc;
+        ctx.fillStyle = colors[i];
+        
+        ctx.beginPath();
+        ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
+        ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
+        ctx.stroke();
+        ctx.fill();
+        
+        ctx.save();
+        ctx.shadowOffsetX = -1;
+        ctx.shadowOffsetY = -1;
+        ctx.shadowBlur    = 0;
+        ctx.fillStyle = "#FFF";
+        ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 250 + Math.sin(angle + arc / 2) * textRadius);
+        ctx.rotate(angle + arc / 2 + Math.PI / 2);
+        var text = number[i];
+        ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+        ctx.restore();
+      } 
+      
+      //Arrow
+      ctx.fillStyle = "yellow";
+      ctx.beginPath();
+      ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
+      ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
+      ctx.lineTo(250 + 4, 250 - (outsideRadius - 5));
+      ctx.lineTo(250 + 9, 250 - (outsideRadius - 5));
+      ctx.lineTo(250 + 0, 250 - (outsideRadius - 13));
+      ctx.lineTo(250 - 9, 250 - (outsideRadius - 5));
+      ctx.lineTo(250 - 4, 250 - (outsideRadius - 5));
+      ctx.lineTo(250 - 4, 250 - (outsideRadius + 5));
+      ctx.fill();
+    }
+  }
+  
+  function spin() {
+    spinAngleStart = Math.random() * 10 + 10;
+    spinTime = 0;
+    spinTimeTotal = Math.random() * 3 + 4 * 1000;
+    rotateWheel();
+  }
+ 
+  function rotateWheel() 
+  {
+    spinTime += 30;
+    if(spinTime >= spinTimeTotal) 
+
+    {
+      stopRotateWheel();
+      return;
+    }
+    var spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+    startAngle += (spinAngle * Math.PI / 180);
+    drawRouletteWheel();
+    spinTimeout = setTimeout('rotateWheel()', 30);
+  }
+  
+  function stopRotateWheel() {
+    clearTimeout(spinTimeout);
+    var degrees = startAngle * 180 / Math.PI + 90;
+    var arcd = arc * 180 / Math.PI;
+    var index = Math.floor((360 - degrees % 360) / arcd);
+    ctx.save(number);
+    ctx.font = 'bold 60px Arial';
+    var text = number[index];
+	  answer = text;
+    mise = document.getElementById("test").value;
+    document.getElementById("joueur").value;
+    document.getElementById("ordinateur").value;
+    console.log (mise)
+	  console.log (text)
+	  select = document.getElementById("choix")
+    console.log(select);
+
+    if (text == 0)
+    {
+      document.getElementById("ordinateur").value =(1*document.getElementById("ordinateur").value + (mise*1));
+      document.getElementById("joueur").value = document.getElementById("joueur").value - mise;
+      console.log (mise)
+    }
+
+    else if (select.value == text) 
+    {
+      document.getElementById("joueur").value = mise * 35;
+      console.log(mise)
+    }
+
+    else if ((select.value == "PAIR") && ((text % 2) == 0))
+    {
+      document.getElementById("joueur").value = (1*document.getElementById("joueur").value + (mise*1));    
+      console.log (mise)
+    }
+    else if ((select.value == "IMPAIR") && ((text % 2) != 0))  
+
+    {
+      document.getElementById("joueur").value = (1*document.getElementById("joueur").value + (mise*1));    
+      console.log (mise)
+    }
+
+    else 
+    {
+      document.getElementById("ordinateur").value =(1*document.getElementById("ordinateur").value + (mise*1));
+      document.getElementById("joueur").value = document.getElementById("joueur").value - mise;    
+      console.log (mise)
+    };
+    
+    
+    ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10)
+    ctx.restore();
+
+  }
+  
+  function easeOut(t, b, c, d) {
+    var ts = (t/=d)*t;
+    var tc = ts*t;
+    return b+c*(tc + -3*ts + 3*t);
+  }
+
+    draw();
+  
+  </script>
+
+</body>
+</html>
