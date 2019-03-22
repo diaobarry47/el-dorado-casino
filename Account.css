@@ -161,22 +161,21 @@ tr, td {
   	font-size: 18px;
 	letter-spacing: 2px;
 }
-.jouer{
+.form{
 	float: right;
-	margin-right: 150px;
-	margin-top: -320;
+    margin-right: 50px;
+    margin-top: -300px;
 	background-color: rgba(17, 3, 5, 0.9);
 	font-family: time new roman;
 	position: relative;
 	padding-top: 10px;
   	padding-bottom: 20px;
-  	padding-left: 10px;
- 	padding-right: 10px;
+  	padding-left: 5px;
  	border: 2px solid;
-  	border-radius: 20px;
+  	border-radius: 30px;
   	border-color: rgba(17, 3, 5, 0.9);
   	font-size: 18px;
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 	font-family: 'Font Awesome\ 5 Free;';
 	content: "\f1fa";
 }
